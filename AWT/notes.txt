@@ -1,0 +1,157 @@
+Abstract Windows ToolKit
+
+refer the image chart
+
+The AWT conatins numerous class and methods that allow us to create and manage windows. It is also the foundation upon which swing is build. AWT is quiet large and full 
+description is not possible however this and the following explain the basic techniques need to use the AWT effectively when creating our own applet or stand alone GUI
+(graphical user interface). 
+
+The AWT classes are contained in the package java.awt, It is one of the largest packages in Java. It is logically organized in the top down hierachical fashion. It is 
+easy to understand and use. 
+
+//
+Windows Fundamentals
+
+The AWT defined the windows according to a class hierachy that adds functionality and specificity with each level. The two most common windows are those derived from the 
+Panel which is used by applets and those derived from the Frame which creates a standard application window. Much of the functionality of these windows is derived from 
+there parent classes.Thus a discreption of the class hierachies relating to these two classes are fundamental to there understanding.
+
+1. Component 
+
+At the top of the AWT hierachy is the Component class, it is an abstract class that encapsulates all of the visual components except for menus all user interface elements
+that are displayed on the screen and that interact with the user are sub classes of the Component. It defines over 100 public methods that are responsible for managing 
+events such as mouse and keyboard input, positioning and sizing of the windows and repainting. A Component object is responsible for remembering the current foreground 
+and background colors and currently selected text font. 
+
+2. Container
+
+This is a sub class of Component. It has additional methods that allow other Component object to be nested within it. Other Container objects can be stored inside of a 
+Container , that is, Container hierachy. Since they are themself the instance of Component. This makes for multi level containment system. A Container is responsible 
+for laying out that is positioning any Component that it contains. It does this through the use of various layout managers. 
+
+3. Panel 
+
+This is a concrete sub class of the Container. A Panel may be thought as a recurssively nestedable screen component. Panel is the super class for applet. When a screen 
+output is directed to an applet it is drawn on the surface of the panel object. A panel is a window that does not contain title bar, menu bar and borders. Other components 
+can be added to the panel object by its add method. Once this components have been added we can position and resize them manually using setLocation(), setSize(), 
+setPreferredSize() or setBounce(). FlowLayout 
+
+4. Window
+
+The top level Window is not contained within any other object. It sets directly on the desktop. Generally we won't create window object directly instead we use sub class 
+of window called frame. 
+
+5. Frame 
+
+This comes with border,resizing, title bar and menu interface. The default layout for frame is BorderLayout. 
+
+6. Canvas
+
+This is not part of the hierachy of applet and frame windows. This is other part of window which is valuable. This encapsulates blank window upon which we can draw.
+
+Understanding Layout Manager
+
+The component can be positioned by the default layout manager. A layout Manager automatically adjusted controls within a window by using some type of algorithm. Unlike
+other languages, in Java you can lay controls by hand. But generally we won't do it for two reasons. First, it is very tedious to manually layout very lager number of 
+components. Secondly, sometime width and height information is not yet available when we need to arrange some control. Each container object has a layout manager 
+associated with it. A layout manager is an instance of any class that implements the layoutManagerInterface. The layout manager is set by the method setlayout(). 
+If no call is made to setLayout() method then default layout manager is used. 
+
+Whenever a container is resized the layout manager is used to position each of the component within it. If we wish to disable the layout manager and position component 
+manually pass null as argument to the setLayout() method. If we do this we will need to determine the shape and position of each component using the method setBounce(). 
+
+Each layout manager keeps track of list of component that are stored by there names. The layout manager is notifed each time we add a component to a container. When a 
+container needs to be resized the layout manager is consulted via its minimumLayoutSize() and preferredLayoutSize(). Each component that is being managed by a layout 
+manager conatins getPreferredSize() and getMinimumSize() method. This return preferred and minimum size required to display each component. The layout manager will honour 
+this request if at all possible, while maintaing the integrity of layout policy. 
+
+Java has several predefined layoutManager classes: -
+FlowLayout()
+BorderLayout()
+GridLayout()
+CardLayout()
+GridBackLayout()
+
+Event Handling :- 
+
+Any program that uses a graphical user interface are event driven programs. Therefore we cannot wirte this types of programs without a solid command of event handling. 
+Events are supprted by number of packages including java.util,java.awt and java.awt.event . Most events to which our program will response are generated when the user 
+interacts with GUI based program. This are the types of events. They are passed to our program in a variety of ways, with the specific method dependent upon the actual 
+event. There are several types of events including those that are generated by keyboard, mouse and various controls such as push button, scroll bar and check box and 
+text field. 
+
+Delegation event Model 
+
+This is modern approach to handling events. This model defines the standard and consistent mechanism to generate and process event. A SOURCE generates an event and sends 
+it one or more listners. In this scheme the listner waits until it recieves an event. Once adn event is recieved the listerner process the event and then returns. The 
+advantages of this event are that application logic that process events is cleanly separated from the use interface logic that generates those events. 
+
+In the Delegation event model, listeners must register with a source in order to recieve an event notification. This provides an important benefit, notification are sent 
+only to listeners that want to recieve them. 
+
+Events 
+
+An event is an object that descrives a state change in source. It can be generated as a consequence of person that interacts with elements in GUI mode. Some of the
+activites that cause events to generate are pressing a button, entering a character via keyboard, selecting an item in the list, and clicking the mouse. 
+
+Events may occur that are not directly created by user interface like Timer expires, counter exceed the value. When software or hardware failure occurs.
+
+Event source
+
+A source is an object that generated event. This occurs when the internal state of there object changes in some way. SOurce may generate more than one type of event. 
+A source must register listerners in order for the listerners to recieve notifications about specific types of events, each type of events has its own registeration
+methods. 
+
+Event listerner
+
+A listerner is an object that is notified when a event occurs. It has two major requirements. First it must have been registered with one or more sources to recieve 
+notifications about specific types of events. Second it must implement methods to recieve and process this notifications. 
+
+Event Classes 
+
+The classes that represent event are the core of Java's Event handling mechanism. Java defines several types of events. These events defined by the AWT. At the root of 
+Java event class hierachy is EventObject() which is java.util package which is super class for all events. The class contains two methods getSource() and toString(). 
+The method getSource returns the source of the event. The package java.AWT defines many types of event that are generated by various user interface components. The 
+following table shows several commonly used events classes and provides a brief desciption of when they are generated. 
+
+Event Classes -> Desciption
+
+1. ActionEvent :- Generates when button is pressed, list item is double clicked or menu item is selected.
+2. AdjustmentEvent :- Generates when scroll bar is manipulated.
+3. FocusEvent :- Generated when a Component gains or loses keyboard focus. 
+4. ItemEvent :- Generated when check box is clicked or list item is clicked or selection is made or checkable menu-item is selected or deselected.
+5. KeyEvent :- Generated when input is recieved from the keyboard
+6. MouseEvent :- Generated when mouse is dragged or moved, clicked, presses or released. Also generated when mouse enters or exits a component. 
+7. TextEvent :- Generated when value of text area is changed.
+8. WindowEvent :- Generated when a window is activated, closed, deactivated, deiconified, opened or quit.
+
+Sources of Events 
+
+Following table lists some of the user interface component that can generate events.
+
+Source of Events -> Description
+
+1. Button -> generates action event when button is pressed
+2. CheckBox -> generates item event when chech box is selected or deselected.
+3. Choice -> generates item event when choice is changed.
+4. List -> generates action event when an item is double clicked, generates when an item is selected or deselected. 
+5. MenuItem -> generates action event when a menu item is selected, generates item event when checkable menu item is selected. 
+6. Scrollbar -> generates adjustment event when the scroll bar is manipulated.
+7. TextArea/ TextField -> generates text event when the user enters a character.
+8. Window -> generates window event when a window is activated or closed, deactivated, deiconified, iconified, opened or quit
+
+Event Listner Interfaces 
+
+The delegation event model has two parts source and listner. Listner are created by implementing one or more of the interfaces defined by the java.awt.event package. 
+When an event occurs the event source invokes the appropriate method defined by the listner and provides event object as its argument. 
+
+Interfaces -> description 
+
+1. ActionListner -> Method to recieve action event. 
+2. AdjustmentListner -> one method to recieve adjustment event. 
+3. FocusListner -> two methods to recognize when a component gains or loses, keyboard focus.
+4. ItemListner -> one method to recognize when the state of an item changes
+5. KeyListner -> three methods to recognize when a key is pressed, released or typed
+6. MouseListner -> five method to recognize when a mouse is clicked, enters a component, exits a component, is pressed or released 
+7. Textlistner -> one method to recognize text value changed 
+8. WindowListner -> defines seven methods to recognize when window is activated, deactivated, closed, deiconified, iconified, opened or quit. 

@@ -1,0 +1,26 @@
+{
+  "java.project.sourcePaths": [
+    "stat",
+    "practice",
+    "io package",
+    "TP",
+    "Swing",
+    "Scanner",
+    "Packag",
+    "Networking",
+    "MultiThreading",
+    "Matrix",
+    "Linked List",
+    "Inheritance",
+    "Important",
+    "File Handling",
+    "DSS",
+    "CmdArg",
+    "Clas",
+    "Basic program",
+    "Array",
+    "AWT",
+    "JDBC"
+  ],
+  "explorer.sortOrder": "default"
+}
